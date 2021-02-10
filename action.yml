@@ -1,34 +1,34 @@
-name: 'IKS Build, Push and Deploy Action'
-description: 'This action builds a docker image, pushes to IBM Cloud Registry and sets a Kubernetes deployment image'
+name: "IKS Build, Push and Deploy Action"
+description: "This action builds a docker image, pushes to IBM Cloud Registry and sets a Kubernetes deployment image"
 inputs:
   github-sha:
-    description: 'GitHub SHA value'
+    description: "GitHub SHA value"
     required: true
   cloud-api-key:
-    description: 'IBM Cloud API Key'
+    description: "IBM Cloud API Key"
     required: true
   cloud-region:
-    description: 'IBM Cloud Region'
+    description: "IBM Cloud Region"
     required: false
-    default: 'us-south'
+    default: "us-south"
   icr-namespace:
-    description: 'IBM Cloud Container Registry namespace'
+    description: "IBM Cloud Container Registry namespace"
     required: true
   registry-hostname:
-    description: 'IBM Cloud Registry hostname'
+    description: "IBM Cloud Registry hostname"
     required: false
-    default: 'us.icr.io'
+    default: "us.icr.io"
   image-name:
-    description: 'Docker image name'
+    description: "Docker image name"
     required: true
   deployment-name:
-    description: 'Deployment name on Kubernetes'
+    description: "Deployment name on Kubernetes"
     required: true
   k8s-cluster-name:
-    description: 'Kubernetes cluster name'
+    description: "Kubernetes cluster name"
     required: true
   k8s-cluster-namespace:
-    description: 'Kubernetes namespace'
+    description: "Kubernetes namespace"
     required: true
 runs:
   using: "composite"
