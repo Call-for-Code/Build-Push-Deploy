@@ -30,6 +30,10 @@ inputs:
   k8s-cluster-namespace:
     description: "Kubernetes namespace"
     required: true
+  working-directory:
+    description: "Working directory that contains a Dockerfile"
+    required: false
+    default: "."
 runs:
   using: "composite"
   steps:
