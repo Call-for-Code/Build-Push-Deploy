@@ -50,7 +50,7 @@ runs:
       shell: bash
 
     - id: build-with-docker
-      run: docker build --tag "${{ inputs.registry-hostname }}"/"${{ inputs.icr-namespace }}"/"${{ inputs.image-name }}":"${{ inputs.github-sha }}" ./web/
+      run: docker build --tag "${{ inputs.registry-hostname }}"/"${{ inputs.icr-namespace }}"/"${{ inputs.image-name }}":"${{ inputs.github-sha }}" "."
       shell: bash
 
     - id: push-to-icr
