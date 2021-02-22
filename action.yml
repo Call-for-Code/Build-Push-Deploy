@@ -7,6 +7,10 @@ inputs:
   cloud-api-key:
     description: "IBM Cloud API Key"
     required: true
+  cloud-resource-group:
+    description: "Cloud Resource Group"
+    required: false
+    default: "default"
   cloud-region:
     description: "IBM Cloud Region"
     required: false
