@@ -52,7 +52,7 @@ runs:
 
     - id: login-to-ibmcloud-cli
       run: |
-        ibmcloud login --apikey "${{ inputs.cloud-api-key }}" -r "${{ inputs.cloud-region }}" -g default
+        ibmcloud login --apikey "${{ inputs.cloud-api-key }}" -r "${{ inputs.cloud-region }}" -g "${{ inputs.cloud-resource-group }}"
         ibmcloud cr region-set "${{ inputs.cloud-region }}"
         ibmcloud cr login
       shell: bash
