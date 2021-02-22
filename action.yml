@@ -40,7 +40,7 @@ inputs:
     default: "."
 runs:
   using: "composite"
-  default: 
+  defaults: 
     run:
       working-directory: ${{ inputs.working-directory }}
       shell: bash
