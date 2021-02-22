@@ -40,10 +40,7 @@ inputs:
     default: "."
 runs:
   using: "composite"
-  defaults: 
-    run:
-      working-directory: ${{ inputs.working-directory }}
-      shell: bash
+
   steps:
     - id: ibmcloud-cli
       run: |
@@ -62,8 +59,9 @@ runs:
       shell: bash
 
     - id: build-with-docker
-      run: docker build --tag "${{ inputs.registry-hostname }}"/"${{ inputs.icr-namespace }}"/"${{ inputs.image-name }}":"${{ inputs.github-sha }}" ${{ inputs.working-directory }}
+      run: docker build --tag "${{ inputs.registry-hostname }}"/"${{ inputs.icr-namespace }}"/"${{ inputs.image-name }}":"${{ inputs.github-sha }}"
       shell: bash
+      working-directory: ${{ inputs.working-directory }}      
 
     - id: push-to-icr
       run: docker push "${{ inputs.registry-hostname }}"/"${{ inputs.icr-namespace }}"/"${{ inputs.image-name }}":"${{ inputs.github-sha }}"
