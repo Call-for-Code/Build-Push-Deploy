@@ -34,8 +34,16 @@ inputs:
   k8s-cluster-namespace:
     description: "Kubernetes namespace"
     required: true
+  working-directory:
+    description: "Working directory that contains a Dockerfile"
+    required: false
+    default: "."
 runs:
   using: "composite"
+  default: 
+    run:
+      working-directory: ${{ inputs.working-directory }}
+      shell: bash
   steps:
     - id: ibmcloud-cli
       run: |
@@ -54,7 +62,7 @@ runs:
       shell: bash
 
     - id: build-with-docker
-      run: docker build --tag "${{ inputs.registry-hostname }}"/"${{ inputs.icr-namespace }}"/"${{ inputs.image-name }}":"${{ inputs.github-sha }}" .
+      run: docker build --tag "${{ inputs.registry-hostname }}"/"${{ inputs.icr-namespace }}"/"${{ inputs.image-name }}":"${{ inputs.github-sha }}" ${{ inputs.working-directory }}
       shell: bash
 
     - id: push-to-icr
