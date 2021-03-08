@@ -15,6 +15,10 @@ inputs:
     description: "IBM Cloud Region"
     required: false
     default: "us-south"
+  icr-region:
+    description: "Container Registry Region"
+    required: false
+    default: "us-south"
   icr-namespace:
     description: "IBM Cloud Container Registry namespace"
     required: true
@@ -27,6 +31,9 @@ inputs:
     required: true
   deployment-name:
     description: "Deployment name on Kubernetes"
+    required: true
+  container-name:
+    description: "Name of the container to set image for"
     required: true
   k8s-cluster-name:
     description: "Kubernetes cluster name"
@@ -53,7 +60,7 @@ runs:
     - id: login-to-ibmcloud-cli
       run: |
         ibmcloud login --apikey "${{ inputs.cloud-api-key }}" -r "${{ inputs.cloud-region }}" -g "${{ inputs.cloud-resource-group }}"
-        ibmcloud cr region-set "${{ inputs.cloud-region }}"
+        ibmcloud cr region-set "${{ inputs.icr-region }}"
         ibmcloud cr login
       shell: bash
 
@@ -71,5 +78,5 @@ runs:
         ibmcloud ks cluster config --cluster ${{ inputs.k8s-cluster-name }}
         kubectl config current-context
         kubectl set image --namespace=${{ inputs.k8s-cluster-namespace }} deployments/${{ inputs.deployment-name }} \
-        ${{ inputs.deployment-name }}=${{ inputs.registry-hostname }}/${{ inputs.icr-namespace }}/${{ inputs.image-name }}:${{ inputs.github-sha }}
+        ${{ inputs.container-name }}=${{ inputs.registry-hostname }}/${{ inputs.icr-namespace }}/${{ inputs.image-name }}:${{ inputs.github-sha }}
       shell: bash
